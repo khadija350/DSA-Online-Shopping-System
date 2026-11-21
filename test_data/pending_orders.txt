@@ -1,0 +1,2 @@
+ORDER|1002|Sara Ahmed|1|2500.00
+ITEM|101|USB Keyboard|2500.00|1

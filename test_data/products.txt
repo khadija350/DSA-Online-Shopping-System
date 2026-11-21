@@ -1,0 +1,5 @@
+101|USB Keyboard|Electronics|2500.00|9
+102|Gaming Mouse|Electronics|4500.00|5
+103|Notebook|Stationery|150.00|95
+104|Wireless Mouse|Electronics|1500.00|23
+105|Ball Pen|Stationery|50.00|0

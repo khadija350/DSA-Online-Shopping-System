@@ -1,0 +1,4 @@
+ORDER|1001|test customer|1|3000.00
+ITEM|101|Wireless Mouse|1500.00|2
+ORDER|1002|Customer 01|1|5000.00
+ITEM|102|USB Keyboard|2500.00|2

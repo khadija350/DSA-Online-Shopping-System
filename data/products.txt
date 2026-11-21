@@ -1,0 +1,4 @@
+101|Wireless Mouse|Electronics|1500.00|18
+102|USB Keyboard|Electronics|2500.00|10
+103|Laptop Stand|Accessories|1800.00|25
+104|Headphones|Electronics|3500.00|8
