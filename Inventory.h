@@ -46,6 +46,7 @@ public:
     int copyProducts(Product copy[]) const;
     int sortByPrice(Product sorted[], bool ascending) const; // insertion sort
     int sortByName(Product sorted[]) const;                  // insertion sort
+    int sortByCategory(Product sorted[], bool ascending) const; // insertion sort
     int sortByStock(Product sorted[], bool ascending) const; // bubble sort
 
     // ----- display -----

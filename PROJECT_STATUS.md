@@ -3,7 +3,8 @@
 _Last updated: 2026-11-20_
 
 ## Overall status
-**Implementation complete.** Both programs compile with no errors or warnings, and all 168 automated tests pass.
+**Implementation complete.** Both programs compile with no errors or warnings, and all 175 automated tests pass.
+(2026-11-21: category sorting A–Z / Z–A added, with 7 new tests in the Sorting section; previously 168 tests.)
 Report/submission documentation has **not** been started yet (planned as a separate task).
 
 ## Files
@@ -11,12 +12,12 @@ Report/submission documentation has **not** been started yet (planned as a separ
 |---|---|
 | `Product.h` | `Product` struct, `MAX_PRODUCTS = 100`, shared result codes |
 | `Utils.h/.cpp` | trim/lowercase/substring search, manual int/double parsing, line splitting, money formatting, safe input (`readInt`, `readIntInRange`, `readDouble`, `readText`, `readYesNo`), `resultMessage` |
-| `Inventory.h/.cpp` | Product array always sorted by ID; add/update (incl. ID change)/delete/reduceStock; binary search (ID); linear search (name, category, price range); insertion sort (price asc/desc, name); bubble sort (stock asc/desc) on a temporary copy |
+| `Inventory.h/.cpp` | Product array always sorted by ID; add/update (incl. ID change)/delete/reduceStock; binary search (ID); linear search (name, category, price range); insertion sort (price asc/desc, name, category asc/desc); bubble sort (stock asc/desc) on a temporary copy |
 | `Cart.h/.cpp` | Singly linked list cart; add (merges duplicates)/remove/update qty/update price/total/clear; inventory-checked `addFromInventory`, `changeQuantity`, `checkItem`, `isReadyForCheckout` |
 | `OrderQueue.h/.cpp` | `OrderItem`/`Order` structs, linked-list queue (front/rear) with enqueue/dequeue/peek/display/total/clear; `placeOrder` (only place stock is deducted); interactive `runCheckout` |
 | `FileManager.h/.cpp` | Creates folders/files; load/save products; load/save pending orders; append/display completed orders; next-order-ID recovery; `processNextOrder`. Saves via temp file + replace so old data is never destroyed on failure |
 | `main.cpp` | Main/Admin/Customer menus using `data/` |
-| `tests.cpp` | 168 automated tests using `test_data/` only |
+| `tests.cpp` | 175 automated tests using `test_data/` only |
 | `data/` | Application data (created automatically, currently empty) |
 | `test_data/` | Test data (recreated by `tests.exe` on every run) |
 
@@ -36,12 +37,12 @@ Run both from the project folder (paths `data/` and `test_data/` are relative):
 - `tests.exe`: compiled successfully, 0 errors, 0 warnings (also checked with `-Wall -Wextra`).
 
 ## Test results
-**168 tests: 168 passed, 0 failed.**
+**175 tests: 175 passed, 0 failed.**
 
 | Section | Covers |
 |---|---|
 | Inventory | valid add, sorted insertion, duplicate ID, invalid values (negative/zero price, negative stock, empty name, ID 0, `|`), full array (100), update existing/missing, ID change success/duplicate, delete existing/missing/empty, binary search (first/middle/last/missing/empty), name/category/price-range search incl. boundaries and invalid range |
-| Sorting | price asc/desc, name A–Z, stock asc/desc, main array still sorted by ID, empty and single-item inventory |
+| Sorting | price asc/desc, name A–Z, stock asc/desc, category A–Z/Z–A (incl. duplicate categories with mixed capitals), main array still sorted by ID, empty and single-item inventory |
 | Cart | add, add same item (merge), total, qty 0/negative, missing product, out-of-stock, qty > stock (incl. qty already in cart), stock not reduced, update qty valid/too high/0, remove existing/missing/from empty, clear |
 | Orders | order total & item count, enqueue, peek, FIFO dequeue, pending total, empty queue dequeue/peek/total, re-use after empty, clear |
 | Checkout | empty cart, deleted product (refuse remove → blocked; remove → succeeds), unavailable product, insufficient stock (declined → qty unchanged; accepted → reduced), invalid quantities, empty name, outdated price refused by `placeOrder`, old/new price shown, updated total shown, cancel (no stock change, no order, cart kept), confirm (latest price charged, stock deducted, cart cleared) |

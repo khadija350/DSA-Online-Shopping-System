@@ -319,6 +319,33 @@ void testSorting() {
     single.addProduct(makeProduct(7, "Only Item", "General", 99, 3));
     n = single.sortByName(sorted);
     check("Sort single-item inventory", "7", idList(sorted, n));
+
+    // ----- Category sorting (insertion sort on a copy) -----
+    // Sample categories: 101 Electronics, 102 Electronics, 103 Stationery,
+    //                    104 Electronics, 105 Stationery
+    n = sample.sortByCategory(sorted, true);
+    check("Insertion sort by category A-Z", "101,102,104,103,105", idList(sorted, n));
+    n = sample.sortByCategory(sorted, false);
+    check("Insertion sort by category Z-A", "103,105,101,102,104", idList(sorted, n));
+
+    // Duplicate categories written with different capitals
+    Inventory mixed;
+    mixed.addProduct(makeProduct(1, "Robot", "Toys", 900, 2));
+    mixed.addProduct(makeProduct(2, "Novel", "books", 700, 4));
+    mixed.addProduct(makeProduct(3, "Charger", "Electronics", 1200, 6));
+    mixed.addProduct(makeProduct(4, "Atlas", "Books", 1500, 1));
+    mixed.addProduct(makeProduct(5, "Puzzle", "toys", 400, 9));
+    n = mixed.sortByCategory(sorted, true);
+    check("Category A-Z: duplicates keep ID order, capitals ignored", "2,4,3,1,5", idList(sorted, n));
+    n = mixed.sortByCategory(sorted, false);
+    check("Category Z-A: duplicates keep ID order, capitals ignored", "1,5,3,2,4", idList(sorted, n));
+
+    check("Main array still sorted by ID after category sorts", "101,102,103,104,105", inventoryIds(sample));
+    check("Category sort of empty inventory (A-Z / Z-A)", "0/0",
+          to_string(empty.sortByCategory(sorted, true)) + "/" + to_string(empty.sortByCategory(sorted, false)));
+    string singleResult = idList(sorted, single.sortByCategory(sorted, true));
+    singleResult += "/" + idList(sorted, single.sortByCategory(sorted, false));
+    check("Category sort of single-item inventory (A-Z / Z-A)", "7/7", singleResult);
 }
 
 // ----------------------------------------------------------------------------

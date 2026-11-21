@@ -239,8 +239,10 @@ void sortMenu(const Inventory& inventory) {
     cout << "3. Name: A to Z (insertion sort)" << endl;
     cout << "4. Stock: low to high (bubble sort)" << endl;
     cout << "5. Stock: high to low (bubble sort)" << endl;
-    cout << "6. Back" << endl;
-    int choice = readIntInRange("Enter choice: ", 1, 6);
+    cout << "6. Category: A to Z (insertion sort)" << endl;
+    cout << "7. Category: Z to A (insertion sort)" << endl;
+    cout << "8. Back" << endl;
+    int choice = readIntInRange("Enter choice: ", 1, 8);
 
     Product sorted[MAX_PRODUCTS];
     int n = 0;
@@ -249,6 +251,8 @@ void sortMenu(const Inventory& inventory) {
     else if (choice == 3) n = inventory.sortByName(sorted);
     else if (choice == 4) n = inventory.sortByStock(sorted, true);
     else if (choice == 5) n = inventory.sortByStock(sorted, false);
+    else if (choice == 6) n = inventory.sortByCategory(sorted, true);
+    else if (choice == 7) n = inventory.sortByCategory(sorted, false);
     else return;
 
     printProductTable(sorted, n);

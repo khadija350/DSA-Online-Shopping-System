@@ -277,6 +277,34 @@ int Inventory::sortByName(Product sorted[]) const {
     return n;
 }
 
+// INSERTION SORT by category - O(n^2). A to Z (ascending) or Z to A
+// (descending), capitals ignored. The comparison is strict, so products in
+// the same category keep their ID order (the sort is stable).
+int Inventory::sortByCategory(Product sorted[], bool ascending) const {
+    int n = copyProducts(sorted);
+    for (int i = 1; i < n; i++) {
+        Product key = sorted[i];
+        string keyCategory = toLowerCase(key.category);
+        int j = i - 1;
+        while (j >= 0) {
+            string current = toLowerCase(sorted[j].category);
+            bool shouldShift;
+            if (ascending) {
+                shouldShift = current > keyCategory;
+            } else {
+                shouldShift = current < keyCategory;
+            }
+            if (!shouldShift) {
+                break;
+            }
+            sorted[j + 1] = sorted[j];
+            j--;
+        }
+        sorted[j + 1] = key;
+    }
+    return n;
+}
+
 // BUBBLE SORT by stock - O(n^2).
 // Repeatedly compares neighbouring products and swaps them if they are in the
 // wrong order. Stops early if a full pass makes no swaps (already sorted).
